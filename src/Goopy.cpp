@@ -63,9 +63,11 @@ void AnimSprite::applyFrame() {
     auto const* f = frame();
     if (!f) { setVisible(false); return; }
     setVisible(true);
+    // Texture rects are in points; Cuphead's frames are plain pixels.
+    float csf = CCDirector::get()->getContentScaleFactor();
     setTexture(f->texture);
-    setTextureRect(CCRect(0, 0, f->width, f->height));
-    setScale(scaleFactor);
+    setTextureRect(CCRect(0, 0, f->width / csf, f->height / csf));
+    setScale(scaleFactor * csf);
     setPosition({f->centerX * scaleFactor, f->centerY * scaleFactor});
 }
 
@@ -130,9 +132,9 @@ void Goopy::setState(State s) {
         case State::Waiting: break;
         case State::Entering:
             setVisible(true);
-            test::report("goopy-appears", m_body->frameCount() > 0, "no animation frames");
             m_hopVel = sheets::kSlamJumpVel;
             m_body->play("airUp");
+            test::report("goopy-appears", m_body->frameCount() > 0, "no animation frames");
             Assets::get().play("bigJump");
             break;
         case State::Idle: m_body->play("idle"); break;
