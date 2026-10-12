@@ -60,8 +60,10 @@ jobs:
           mkdir -p dist/loader dist/release/geode/mods
           gh release download "v$GEODE_VERSION" -R geode-sdk/geode -p "*-win.zip" -D dist/loader
           unzip -o dist/loader/*-win.zip -d dist/release
+          rm -f dist/release/*.pdb dist/release/*.lib
           cp "${{ steps.build.outputs.build-output }}"/*.geode dist/release/geode/mods/
-          cp LICENSE dist/release/geode/mods/dlg.goopy-dash.LICENSE.txt
+          cp LICENSE dist/release/geode/goopy-dash-LICENSE.txt
+          curl -sL https://raw.githubusercontent.com/geode-sdk/geode/v$GEODE_VERSION/LICENSE.txt -o dist/release/geode/geode-LICENSE.txt
           ls -R dist/release
           cd dist/release && 7z a ../goopy-dash-melty.zip . > /dev/null
 
