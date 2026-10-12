@@ -9,6 +9,6 @@
     {"id": "kill",        "target": "PlayLayer::destroyPlayer(PlayerObject*, GameObject*)", "kind": "call", "purpose": "hazard kills player (with m_anticheatSpike)", "verified": true},
     {"id": "cupAtlas",    "target": "{cuphead}/Cuphead_Data/StreamingAssets/AssetBundles/atlas_slimelevel", "kind": "read", "purpose": "Goopy sprites", "verified": true},
     {"id": "cupSfx",      "target": "{cuphead}/Cuphead_Data/sharedassets*.assets + .resource", "kind": "read", "purpose": "Goopy sounds", "verified": true},
-    {"id": "cupFolder",   "target": "env GOOPYDASH_CUPHEAD_DIR (Melty {game:<cuphead slug>}), else Steam libraries", "kind": "config", "purpose": "find player's Cuphead", "verified": true}
+    {"id": "cupFolder",   "target": "launch arg --geode:dlg.goopy-dash.cuphead-dir={game:custom-cuphead} (Melty), env GOOPYDASH_CUPHEAD_DIR, mod setting, else Steam libraries", "kind": "config", "purpose": "find player's Cuphead", "verified": true}
   ]
 }

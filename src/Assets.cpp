@@ -65,7 +65,11 @@ std::vector<fs::path> steamLibraries() {
 } // namespace
 
 fs::path findCupheadDir() {
-    // 1. Melty passes the player's Cuphead folder when it launches the mashup.
+    // 1. Melty passes the player's Cuphead folder when it launches the mashup
+    //    (as a Geode launch argument through Steam, or an environment variable).
+    if (auto arg = Mod::get()->getLaunchArgument("cuphead-dir")) {
+        if (auto p = fs::path(utils::string::utf8ToWide(*arg)); isCupheadDir(p)) return p;
+    }
     if (auto p = envPath("GOOPYDASH_CUPHEAD_DIR"); isCupheadDir(p)) return p;
     // 2. The folder the player picked in the mod's settings.
     if (auto p = Mod::get()->getSettingValue<fs::path>("cuphead-folder"); isCupheadDir(p)) return p;
