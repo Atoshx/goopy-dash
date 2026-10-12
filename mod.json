@@ -3,7 +3,7 @@
 	"gd": { "win": "2.2081" },
 	"id": "dlg.goopy-dash",
 	"name": "Goopy Dash",
-	"version": "v1.0.1",
+	"version": "v1.0.2",
 	"developer": "DLG",
 	"description": "Goopy Le Grande from your own Cuphead install chases you through Geometry Dash levels.",
 	"settings": {

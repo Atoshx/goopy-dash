@@ -20,6 +20,7 @@ class $modify(GoopyPlayLayer, PlayLayer) {
     struct Fields {
         goopy::Goopy* goopy = nullptr;
         bool warned = false;
+        float testDefeatTimer = -1.f;
     };
 
     bool init(GJGameLevel* level, bool useReplay, bool dontCreateObjects) {
@@ -63,6 +64,20 @@ class $modify(GoopyPlayLayer, PlayLayer) {
         // Cuphead may still be loading when the level opens.
         if (!m_fields->goopy) this->spawnGoopy();
         if (m_fields->goopy) m_fields->goopy->tick(dt);
+        // Melty test runs: beat Goopy just before the end, then go again,
+        // so the run never reaches GD's level-complete flow.
+        if (goopy::test::active() && m_fields->goopy) {
+            if (m_fields->testDefeatTimer < 0 && this->getCurrentPercent() >= 85.f) {
+                m_fields->goopy->defeat();
+                m_fields->testDefeatTimer = 0;
+            } else if (m_fields->testDefeatTimer >= 0) {
+                m_fields->testDefeatTimer += dt;
+                if (m_fields->testDefeatTimer > 4.f) {
+                    m_fields->testDefeatTimer = -1.f;
+                    this->resetLevel();
+                }
+            }
+        }
     }
 };
 
