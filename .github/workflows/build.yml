@@ -63,6 +63,7 @@ jobs:
           rm -f dist/release/*.pdb dist/release/*.lib
           cp "${{ steps.build.outputs.build-output }}"/*.geode dist/release/geode/mods/
           cp LICENSE dist/release/geode/goopy-dash-LICENSE.txt
+          cp PACKAGE-README.txt dist/release/geode/goopy-dash-README.txt
           curl -sL https://raw.githubusercontent.com/geode-sdk/geode/v$GEODE_VERSION/LICENSE.txt -o dist/release/geode/geode-LICENSE.txt
           ls -R dist/release
           cd dist/release && 7z a ../goopy-dash-melty.zip . > /dev/null
