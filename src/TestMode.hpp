@@ -6,4 +6,6 @@
 namespace goopy::test {
 bool active();
 void report(std::string_view check, bool pass, std::string_view why = {});
+// Saves what's on screen (the game only) to geode/config/dlg.goopy-dash/shots/<name>.png, once per name.
+void capture(std::string_view name);
 }

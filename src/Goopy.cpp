@@ -227,6 +227,7 @@ void Goopy::updateHazards(float dt) {
     float px = playerX();
     auto const* atk = findAttack("slam");
     for (auto& h : m_hazards) {
+        if (h.life > 0.35f && h.life < 0.5f) test::capture("slam");
         h.life += dt;
         h.x += h.vx * dt;
         h.sprite->step(dt);
@@ -273,6 +274,7 @@ void Goopy::tick(float dt) {
             }
             break;
         case State::Idle:
+            if (m_stateTime > 0.3f) test::capture("idle");
             m_untilAttack -= dt;
             if (m_untilAttack <= 0 && !p->m_isUpsideDown) chooseAttack();
             break;
@@ -283,6 +285,7 @@ void Goopy::tick(float dt) {
             if (m_body->frameIndex() + 1 >= sheets::kPunchActiveFrom - 1) setState(State::Punching);
             break;
         case State::Punching:
+            if (m_body->frameIndex() + 1 == 17) test::capture("punch");
             if (hitsPlayer(gloveRect())) killPlayer();
             if (animDone) setState(State::Recover);
             break;
