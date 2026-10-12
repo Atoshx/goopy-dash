@@ -10,6 +10,7 @@ add_library(${PROJECT_NAME} SHARED
     src/main.cpp
     src/Assets.cpp
     src/Goopy.cpp
+    src/TestMode.cpp
     src/cupread/cupread.cpp
     src/third_party/lz4.c
 )

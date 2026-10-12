@@ -1,5 +1,6 @@
 #include "Goopy.hpp"
 #include "generated/Sheets.hpp"
+#include "TestMode.hpp"
 
 #include <Geode/binding/GJGameLevel.hpp>
 #include <algorithm>
@@ -129,6 +130,7 @@ void Goopy::setState(State s) {
         case State::Waiting: break;
         case State::Entering:
             setVisible(true);
+            test::report("goopy-appears", m_body->frameCount() > 0, "no animation frames");
             m_hopVel = sheets::kSlamJumpVel;
             m_body->play("airUp");
             Assets::get().play("bigJump");
@@ -147,9 +149,15 @@ void Goopy::setState(State s) {
             Assets::get().play("punchVoice");
             break;
         }
-        case State::Punching: Assets::get().play("punch"); break;
+        case State::Punching:
+            Assets::get().play("punch");
+            test::report("goopy-punch", true);
+            break;
         case State::Recover: m_targetRelX = sheets::kOffsetX; m_body->play("idle"); break;
-        case State::Defeated: m_body->play("death"); break;
+        case State::Defeated:
+            m_body->play("death");
+            test::report("goopy-defeated", m_body->frameCount() > 0, "no death frames");
+            break;
     }
 }
 
@@ -199,6 +207,7 @@ void Goopy::spawnDust() {
     h.height = atk->hazardHeight;
     holder->setPosition({h.x, h.y + atk->hazardFootPx * atk->hazardScale});
     m_hazards.push_back(h);
+    test::report("goopy-slam", sprite->frameCount() > 0, "no dust frames");
 }
 
 bool Goopy::hitsPlayer(CCRect const& r) const {
@@ -210,6 +219,7 @@ bool Goopy::hitsPlayer(CCRect const& r) const {
 void Goopy::killPlayer() {
     auto* p = m_layer->m_player1;
     if (!p || p->m_isDead) return;
+    test::report("goopy-hits", true);
     m_layer->destroyPlayer(p, nullptr);
 }
 

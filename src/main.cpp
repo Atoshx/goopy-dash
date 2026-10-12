@@ -3,9 +3,12 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/GJBaseGameLayer.hpp>
 #include <Geode/modify/PlayLayer.hpp>
+#include <Geode/modify/MenuLayer.hpp>
+#include <Geode/binding/GameLevelManager.hpp>
 
 #include "Assets.hpp"
 #include "Goopy.hpp"
+#include "TestMode.hpp"
 
 using namespace geode::prelude;
 
@@ -45,6 +48,12 @@ class $modify(GoopyPlayLayer, PlayLayer) {
         if (m_fields->goopy) m_fields->goopy->reset();
     }
 
+    void destroyPlayer(PlayerObject* player, GameObject* object) {
+        // In Melty's test runs the player can't steer, so keep the run going.
+        if (goopy::test::active()) return;
+        PlayLayer::destroyPlayer(player, object);
+    }
+
     void levelComplete() {
         if (m_fields->goopy) m_fields->goopy->defeat();
         PlayLayer::levelComplete();
@@ -61,5 +70,21 @@ class $modify(GJBaseGameLayer) {
     void update(float dt) {
         GJBaseGameLayer::update(dt);
         if (auto* pl = typeinfo_cast<PlayLayer*>(this)) static_cast<GoopyPlayLayer*>(pl)->tickGoopy(dt);
+    }
+};
+
+// Melty test run: go straight into Stereo Madness so Goopy is on screen.
+class $modify(MenuLayer) {
+    bool init() {
+        if (!MenuLayer::init()) return false;
+        static bool launched = false;
+        if (goopy::test::active() && !launched) {
+            launched = true;
+            Loader::get()->queueInMainThread([] {
+                auto* level = GameLevelManager::sharedState()->getMainLevel(1, false);
+                CCDirector::get()->replaceScene(CCTransitionFade::create(0.5f, PlayLayer::scene(level, false, false)));
+            });
+        }
+        return true;
     }
 };

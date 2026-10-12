@@ -1,5 +1,6 @@
 #include "Assets.hpp"
 #include "generated/Sheets.hpp"
+#include "TestMode.hpp"
 
 #include <Geode/binding/FMODAudioEngine.hpp>
 #include <cstdlib>
@@ -88,6 +89,7 @@ void Assets::startLoading() {
         m_error = "Cuphead isn't installed (or its folder wasn't found). Goopy needs your copy of Cuphead.";
         m_state = State::Failed;
         log::error("{}", m_error);
+        test::report("cuphead-found", false, "Cuphead folder not found");
         return;
     }
     log::info("Reading Goopy Le Grande from {}", utils::string::pathToString(m_cupheadDir));
@@ -106,11 +108,13 @@ void Assets::startLoading() {
             m_error = "Couldn't read Goopy's art from Cuphead: " + sr.error;
             m_state = State::Failed;
             log::error("{}", m_error);
+            queueInMainThread([err = sr.error] { test::report("cuphead-found", false, err); });
             return;
         }
         if (!cr.ok || !cr.error.empty()) log::warn("Goopy sounds: {}", cr.error);
         log::info("Loaded {} Goopy frames and {} sounds from Cuphead", m_frames.size(), m_clips.size());
         m_state = State::Ready;
+        queueInMainThread([n = m_frames.size()] { test::report("cuphead-found", n >= 90, "too few Goopy frames"); });
     }).detach();
 }
 
@@ -178,6 +182,7 @@ void Assets::play(std::string_view soundId) {
         if (engine->m_system->playSound(snd, engine->m_globalChannel, true, &ch) == FMOD_OK && ch) {
             ch->setVolume(s.volume * engine->m_sfxVolume);
             ch->setPaused(false);
+            test::report("goopy-sounds", true);
         }
         return;
     }
