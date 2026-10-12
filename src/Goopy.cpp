@@ -167,7 +167,7 @@ void Goopy::chooseAttack() {
     setState(State::SlamWindup);
 }
 
-CCRect Goopy::gloveRect() const {
+CCRect Goopy::gloveRect() {
     // Only while the punch is stretched out.
     if (m_state != State::Punching || m_body->current() != "punch") return CCRect(0, 0, 0, 0);
     int f = m_body->frameIndex() + 1;

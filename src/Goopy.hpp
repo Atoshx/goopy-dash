@@ -71,7 +71,7 @@ private:
     void updateHazards(float dt);
     bool hitsPlayer(cocos2d::CCRect const& r) const;
     void killPlayer();
-    cocos2d::CCRect gloveRect() const;
+    cocos2d::CCRect gloveRect();
 };
 
 } // namespace goopy
