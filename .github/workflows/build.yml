@@ -25,6 +25,29 @@ jobs:
         with:
           sdk: given
 
+      - name: Report build errors
+        if: failure() && steps.build.outcome == 'failure'
+        shell: bash
+        run: |
+          if [ -d build ]; then
+            cmake --build build --config Release > buildlog.txt 2>&1 || true
+          else
+            cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -G Ninja -DGEODE_DONT_INSTALL_MODS=ON -DGEODE_TARGET_PLATFORM=Win64 > buildlog.txt 2>&1 || true
+          fi
+          grep -nE "error|Error|ERROR" buildlog.txt | grep -v "^.*-Werror" | head -40 > errs.txt || true
+          [ -s errs.txt ] || tail -40 buildlog.txt > errs.txt
+          python - <<'PY'
+          import re
+          lines=open('errs.txt',encoding='utf-8',errors='replace').read().splitlines()
+          chunk=[]
+          for i,l in enumerate(lines):
+              chunk.append(l[:600])
+              if len(chunk)==4 or i==len(lines)-1:
+                  msg='%0A'.join(c.replace('%','%25').replace('\r','') for c in chunk)
+                  print('::error::'+msg); chunk=[]
+          PY
+          exit 1
+
       - name: Package for Melty (Geode loader + mod)
         shell: bash
         env:
