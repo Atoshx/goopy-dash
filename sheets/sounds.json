@@ -1,0 +1,12 @@
+{
+  "_doc": "One row per Goopy sound, read from the player's Cuphead copy: AudioClip objects in the slime level's sharedassets file (found by scanning Cuphead_Data/sharedassets*.assets for the clip name), FSB5 data in its .resource file, played through GD's own FMOD.",
+  "columns": ["id", "clipNames", "volume", "verifiedInGame"],
+  "rows": [
+    {"id": "bigJump",   "clipNames": ["sfx_slime_big_jump_01","sfx_slime_big_jump_02","sfx_slime_big_jump_03","sfx_slime_big_jump_04","sfx_slime_big_jump_05"], "volume": 0.8, "verifiedInGame": true},
+    {"id": "bigLand",   "clipNames": ["sfx_slime_big_land_02","sfx_slime_big_land_03","sfx_slime_big_land_04","sfx_slime_big_land_05"], "volume": 0.8, "verifiedInGame": true},
+    {"id": "punch",     "clipNames": ["sfx_slime_big_punch_01","sfx_slime_big_punch_02","sfx_slime_big_punch_03","sfx_slime_big_punch_04"], "volume": 0.8, "verifiedInGame": true},
+    {"id": "punchVoice","clipNames": ["sfx_slime_big_punch_voice_01","sfx_slime_big_punch_voice_02","sfx_slime_big_punch_voice_03","sfx_slime_big_punch_voice_04","sfx_slime_big_punch_voice_05","sfx_slime_big_punch_voice_06"], "volume": 0.9, "verifiedInGame": true},
+    {"id": "death",     "clipNames": ["sfx_slime_big_death_01"], "volume": 0.9, "verifiedInGame": true},
+    {"id": "deathVoice","clipNames": ["sfx_slime_big_death_voice_01","sfx_slime_big_death_voice_02"], "volume": 0.9, "verifiedInGame": true}
+  ]
+}

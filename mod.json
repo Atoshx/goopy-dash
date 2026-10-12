@@ -1,0 +1,41 @@
+{
+	"geode": "5.11.1",
+	"gd": { "win": "2.2081" },
+	"id": "dlg.goopy-dash",
+	"name": "Goopy Dash",
+	"version": "v1.0.0",
+	"developer": "DLG",
+	"description": "Goopy Le Grande from your own Cuphead install chases you through Geometry Dash levels.",
+	"settings": {
+		"enabled": {
+			"name": "Goopy shows up",
+			"type": "bool",
+			"default": true
+		},
+		"goopy-hurts": {
+			"name": "Goopy's attacks kill",
+			"description": "Turn off to watch Goopy without dying to him.",
+			"type": "bool",
+			"default": true
+		},
+		"goopy-sounds": {
+			"name": "Goopy's sounds",
+			"type": "bool",
+			"default": true
+		},
+		"attack-interval": {
+			"name": "Seconds between attacks",
+			"type": "float",
+			"default": 2.6,
+			"min": 1.2,
+			"max": 8.0,
+			"control": { "slider": true, "slider-step": 0.1 }
+		},
+		"cuphead-folder": {
+			"name": "Cuphead folder",
+			"description": "Only needed if Goopy can't find your Cuphead install by himself.",
+			"type": "folder",
+			"default": ""
+		}
+	}
+}

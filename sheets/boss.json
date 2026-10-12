@@ -1,0 +1,101 @@
+{
+  "_doc": "Goopy Le Grande's behaviour in a GD run.",
+  "columns": [
+    "id",
+    "value",
+    "unit",
+    "usedBy"
+  ],
+  "rows": [
+    {
+      "id": "enterDelay",
+      "value": 1.5,
+      "unit": "s",
+      "usedBy": "BossState::Entering"
+    },
+    {
+      "id": "offsetX",
+      "value": 300,
+      "unit": "gd units",
+      "usedBy": "Goopy::update"
+    },
+    {
+      "id": "scale",
+      "value": 0.22,
+      "unit": "x",
+      "usedBy": "Goopy::init"
+    },
+    {
+      "id": "attackInterval",
+      "value": 2.6,
+      "unit": "s",
+      "usedBy": "setting attack-interval"
+    },
+    {
+      "id": "defeatOn",
+      "value": "levelComplete",
+      "unit": "event",
+      "usedBy": "hooks.levelComplete"
+    },
+    {
+      "id": "footPx",
+      "value": 215,
+      "unit": "source px below pivot (Goopy's feet, shadow excluded)",
+      "usedBy": "Goopy::tick"
+    },
+    {
+      "id": "enterFromX",
+      "value": 560,
+      "unit": "gd units ahead of player",
+      "usedBy": "State::Entering"
+    },
+    {
+      "id": "slamJumpVel",
+      "value": 420,
+      "unit": "gd units/s",
+      "usedBy": "State::SlamAir"
+    },
+    {
+      "id": "gravity",
+      "value": 1400,
+      "unit": "gd units/s^2",
+      "usedBy": "State::SlamAir"
+    },
+    {
+      "id": "gloveTopPx",
+      "value": -5,
+      "unit": "source px from pivot",
+      "usedBy": "gloveRect"
+    },
+    {
+      "id": "gloveBottomPx",
+      "value": -115,
+      "unit": "source px from pivot",
+      "usedBy": "gloveRect"
+    },
+    {
+      "id": "gloveLengthPx",
+      "value": 110,
+      "unit": "source px from glove tip",
+      "usedBy": "gloveRect"
+    },
+    {
+      "id": "punchActiveFrom",
+      "value": 15,
+      "unit": "punch frame (1-based)",
+      "usedBy": "gloveRect"
+    },
+    {
+      "id": "punchActiveTo",
+      "value": 18,
+      "unit": "punch frame (1-based)",
+      "usedBy": "gloveRect"
+    },
+    {
+      "id": "punchTipRelX",
+      "value": -10,
+      "unit": "gd units relative to player centre",
+      "usedBy": "State::PunchWindup"
+    }
+  ]
+}

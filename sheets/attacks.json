@@ -1,0 +1,47 @@
+{
+  "_doc": "One row per Goopy attack. Distances in GD units (one block = 30) unless marked Px (Cuphead source pixels). Slam: Goopy lands and sends a slime dust wave along the ground toward the player. Punch: Goopy's stretch punch reaches back to the player; hitbox is the glove.",
+  "columns": [
+    "id",
+    "windupAnim",
+    "windupSec",
+    "sound",
+    "voice",
+    "hazardAnim",
+    "hazardScale",
+    "hazardFootPx",
+    "hazardWidth",
+    "hazardHeight",
+    "hazardSpeed",
+    "weight"
+  ],
+  "rows": [
+    {
+      "id": "slam",
+      "windupAnim": "jump",
+      "windupSec": 0.9,
+      "sound": "bigLand",
+      "voice": null,
+      "hazardAnim": "dust",
+      "hazardScale": 0.1,
+      "hazardFootPx": 120,
+      "hazardWidth": 40,
+      "hazardHeight": 20,
+      "hazardSpeed": 160,
+      "weight": 3
+    },
+    {
+      "id": "punch",
+      "windupAnim": "punch",
+      "windupSec": 0.55,
+      "sound": "punch",
+      "voice": "punchVoice",
+      "hazardAnim": null,
+      "hazardScale": null,
+      "hazardFootPx": null,
+      "hazardWidth": 24,
+      "hazardHeight": 24,
+      "hazardSpeed": 0,
+      "weight": 2
+    }
+  ]
+}

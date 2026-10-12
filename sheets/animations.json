@@ -1,0 +1,16 @@
+{
+  "_doc": "One row per Goopy animation, read from the player's Cuphead copy (StreamingAssets/AssetBundles/atlas_slimelevel, sprite atlas 'SlimeLevel'). Frames are sprite names <prefix>_NNNN, numbered from 1.",
+  "columns": ["id", "spritePrefix", "frameCount", "fps", "loop", "verifiedInBundle"],
+  "rows": [
+    {"id": "idle",      "spritePrefix": "lg_slime_idle",       "frameCount": 5,  "fps": 12, "loop": true,  "verifiedInBundle": true},
+    {"id": "jump",      "spritePrefix": "lg_slime_jump",       "frameCount": 8,  "fps": 24, "loop": false, "verifiedInBundle": true},
+    {"id": "airUp",     "spritePrefix": "lg_slime_air_up",     "frameCount": 4,  "fps": 18, "loop": true,  "verifiedInBundle": true},
+    {"id": "airDown",   "spritePrefix": "lg_slime_air_down",   "frameCount": 5,  "fps": 18, "loop": true,  "verifiedInBundle": true},
+    {"id": "upDown",    "spritePrefix": "lg_slime_up_down_trans","frameCount": 5, "fps": 24, "loop": false, "verifiedInBundle": true},
+    {"id": "punch",     "spritePrefix": "lg_slime_punch",      "frameCount": 19, "fps": 24, "loop": false, "verifiedInBundle": true},
+    {"id": "hurt",      "spritePrefix": "lg_slime_hurt",       "frameCount": 5,  "fps": 24, "loop": false, "verifiedInBundle": true},
+    {"id": "death",     "spritePrefix": "lg_slime_death",      "frameCount": 20, "fps": 18, "loop": true,  "verifiedInBundle": true},
+    {"id": "dust",      "spritePrefix": "lg_slime_dust_a",     "frameCount": 16, "fps": 24, "loop": true,  "verifiedInBundle": true},
+    {"id": "explode",   "spritePrefix": "lg_slime_explode",    "frameCount": 16, "fps": 24, "loop": false, "verifiedInBundle": true}
+  ]
+}

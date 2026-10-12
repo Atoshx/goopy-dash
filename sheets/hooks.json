@@ -1,0 +1,14 @@
+{
+  "_doc": "Every GD 2.2081 function the mod hooks (Geode bindings), and every Cuphead file it reads.",
+  "columns": ["id", "target", "kind", "purpose", "verified"],
+  "rows": [
+    {"id": "plInit",      "target": "PlayLayer::init(GJGameLevel*, bool, bool)", "kind": "geode-hook", "purpose": "spawn Goopy node in m_objectLayer", "verified": true},
+    {"id": "update",      "target": "GJBaseGameLayer::update(float)",           "kind": "geode-hook", "purpose": "drive Goopy + hazards, collision", "verified": true},
+    {"id": "reset",       "target": "PlayLayer::resetLevel()",                  "kind": "geode-hook", "purpose": "reset Goopy each attempt", "verified": true},
+    {"id": "complete",    "target": "PlayLayer::levelComplete()",               "kind": "geode-hook", "purpose": "Goopy death animation + sound", "verified": true},
+    {"id": "kill",        "target": "PlayLayer::destroyPlayer(PlayerObject*, GameObject*)", "kind": "call", "purpose": "hazard kills player (with m_anticheatSpike)", "verified": true},
+    {"id": "cupAtlas",    "target": "{cuphead}/Cuphead_Data/StreamingAssets/AssetBundles/atlas_slimelevel", "kind": "read", "purpose": "Goopy sprites", "verified": true},
+    {"id": "cupSfx",      "target": "{cuphead}/Cuphead_Data/sharedassets*.assets + .resource", "kind": "read", "purpose": "Goopy sounds", "verified": true},
+    {"id": "cupFolder",   "target": "env GOOPYDASH_CUPHEAD_DIR (Melty {game:<cuphead slug>}), else Steam libraries", "kind": "config", "purpose": "find player's Cuphead", "verified": true}
+  ]
+}

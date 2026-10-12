@@ -1,0 +1,50 @@
+name: Build Goopy Dash
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["**"]
+
+jobs:
+  build:
+    name: Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check design sheets
+        shell: bash
+        run: |
+          python tools/preflight.py
+          python tools/gen_sheets.py
+          git diff --exit-code src/generated
+
+      - name: Build the mod
+        id: build
+        uses: geode-sdk/build-geode-mod@main
+        with:
+          sdk: given
+
+      - name: Package for Melty (Geode loader + mod)
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          GEODE_VERSION=$(python -c "import json;print(json.load(open('mod.json'))['geode'])")
+          mkdir -p dist/loader dist/release/geode/mods
+          gh release download "v$GEODE_VERSION" -R geode-sdk/geode -p "*-win.zip" -D dist/loader
+          unzip -o dist/loader/*-win.zip -d dist/release
+          cp "${{ steps.build.outputs.build-output }}"/*.geode dist/release/geode/mods/
+          cp LICENSE dist/release/geode/mods/dlg.goopy-dash.LICENSE.txt
+          ls -R dist/release
+          cd dist/release && 7z a ../goopy-dash-melty.zip . > /dev/null
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: goopy-dash-geode
+          path: ${{ steps.build.outputs.build-output }}/*.geode
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: goopy-dash-melty
+          path: dist/goopy-dash-melty.zip

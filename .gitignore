@@ -1,0 +1,6 @@
+build/
+tests/*.png
+tests/*.fsb
+tests/extract_test
+tests/sheet
+tests/glove
